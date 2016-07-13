@@ -27,3 +27,15 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :ueberauth, Ueberauth,
+  providers: [
+    identity: {Ueberauth.Strategy.Identity, [callback_methods: ["POST"]]}
+  ]
+
+config :guardian, Guardian,
+  issuer: "PhoenixChat",
+  ttl: {30, :days},
+  secret_key: "uw/27wdrIquPn2fktwfJg9tg8qOl5ysTPCFjISw1TCCaLlfWgRUAea1SuWcfERzX",
+  serializer: PhoenixChat.GuardianSerializer,
+  permissions: %{default: [:read, :write]}
